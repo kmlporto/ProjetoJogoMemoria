@@ -26,7 +26,7 @@ class ImageAdapter: BaseAdapter {
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val imgView: ImageView
+        var imgView: ImageView
         if (convertView == null){
             imgView = ImageView(this.context)
             val lp = LinearLayout.LayoutParams(
