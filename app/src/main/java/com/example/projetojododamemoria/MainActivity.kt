@@ -1,5 +1,6 @@
 package com.example.projetojododamemoria
 
+import android.app.Activity
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -12,13 +13,14 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btGerarJogo: Button
 
     val LISTAR = 1
+    val JOGO = 2
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         daoProf = ProfessorDAO(this)
-        carregarBanco()
+        //carregarBanco()
         this.btListProf = findViewById(R.id.btLstProf)
         this.btListProf.setOnClickListener({chamarLisProf(it)})
 
@@ -60,15 +62,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun chamarJogo(view: View){
-
+        val intent = Intent(this, MemoryGame::class.java)
+        intent.putExtra("dao", daoProf.get())
+        startActivityForResult(intent, JOGO)
     }
 
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, data)
-//
-//        if(resultCode == Activity.RESULT_OK && requestCode == LISTAR){
-//
-//        }
-//    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if(resultCode == Activity.RESULT_OK && requestCode == JOGO){
+
+        }
+    }
     
 }

@@ -11,7 +11,7 @@ import android.widget.Toast
 import ImageAdapter
 
 class MemoryGame : AppCompatActivity() {
-
+    var professores = intent.getSerializableExtra("dao")
     lateinit var gvImagens: GridView
     var curView: ImageView? = null
     private var countPair: Int = 0
@@ -34,9 +34,7 @@ class MemoryGame : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         this.gvImagens = findViewById(R.id.gvImagens)
-
         val imageAdapter= ImageAdapter(this)
-
         gvImagens.adapter = (imageAdapter)
 
         var currentPlay = 0
