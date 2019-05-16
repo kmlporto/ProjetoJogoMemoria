@@ -8,7 +8,7 @@ class BancoHelper (context: Context):
     SQLiteOpenHelper(context, "teste", null, 1){
 
     override fun onCreate(db: SQLiteDatabase?) {
-        val sql = "create table professor(id integer primary key autoincrement, nome text, disciplinas text, img text)"
+        val sql = "create table professor(id integer primary key autoincrement, nome text, disciplinas text, img integer)"
         db?.execSQL(sql)
     }
 

@@ -4,16 +4,16 @@ class Professor {
     var id: Int
     var nome: String
     var disciplinas: String
-    var img: String
+    var img: Int
 
-    constructor(id: Int, nome:String, disciplinas:String, img: String){
+    constructor(id: Int, nome:String, disciplinas:String, img: Int){
         this.id = id
         this.nome = nome
         this.disciplinas = disciplinas
         this.img = img
     }
 
-    constructor(nome:String, disciplinas: String, img: String){
+    constructor(nome:String, disciplinas: String, img: Int){
         this.id = -1
         this.nome = nome
         this.disciplinas = disciplinas

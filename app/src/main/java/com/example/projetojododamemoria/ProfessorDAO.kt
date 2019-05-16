@@ -30,7 +30,7 @@ class ProfessorDAO {
                 val id = c.getInt(c.getColumnIndex("id"))
                 val nome = c.getString(c.getColumnIndex("nome"))
                 val disciplinas = c.getString(c.getColumnIndex("disciplinas"))
-                val img = c.getString(c.getColumnIndex("img"))
+                val img = c.getInt(c.getColumnIndex("img"))
                 lista.add(Professor(id, nome, disciplinas, img))
             }while (c.moveToNext())
         }
@@ -50,7 +50,7 @@ class ProfessorDAO {
             val id = c.getInt(c.getColumnIndex("id"))
             val nome = c.getString(c.getColumnIndex("nome"))
             val disciplinas = c.getString(c.getColumnIndex("disciplinas"))
-            val img = c.getString(c.getColumnIndex("img"))
+            val img = c.getInt(c.getColumnIndex("img"))
             return Professor(id, nome, disciplinas, img)
         }
 

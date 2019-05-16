@@ -9,34 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 
+
 class ListActivity : AppCompatActivity() {
     private lateinit var lvProfessores: ListView
     private lateinit var dao: ProfessorDAO
-    val fotos= arrayOf(
-        R.drawable.alana,
-        R.drawable.alex,
-        R.drawable.candido,
-        R.drawable.crishane,
-        R.drawable.damires,
-        R.drawable.denio,
-        R.drawable.edemberg,
-        R.drawable.fausto,
-        R.drawable.francisco,
-        R.drawable.fred,
-        R.drawable.giovanni,
-        R.drawable.gustavo,
-        R.drawable.heremita,
-        R.drawable.juliana,
-        R.drawable.lafayette,
-        R.drawable.leonidas,
-        R.drawable.nilton,
-        R.drawable.petronio,
-        R.drawable.pryscilla,
-        R.drawable.thiago,
-        R.drawable.valeria,
-        R.drawable.varandas,
-        R.drawable.zefilho
-    ).toList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,11 +46,9 @@ class ListActivity : AppCompatActivity() {
             var professor = listProfs[position]
             nomeTextView.text = professor.nome
             disciplinasTextView.text = professor.disciplinas
-            //var nomeImagem = professor.img
-            //var nomeImagem = img1
-            //var imagem: ImageView
-            //imagem = findViewById(R.drawable.img1)
-            fotoImageView.setImageResource(R.drawable.alana)
+            var fotoProfessor = professor.img
+
+            fotoImageView.setImageResource(fotoProfessor)
 
             return rowView
         }
