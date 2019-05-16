@@ -1,6 +1,8 @@
 package com.example.projetojododamemoria
 
-class Professor {
+import java.io.Serializable
+
+class Professor : Serializable{
     var id: Int
     var nome: String
     var disciplinas: String
