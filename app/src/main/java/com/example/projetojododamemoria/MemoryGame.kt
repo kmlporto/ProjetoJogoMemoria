@@ -11,72 +11,71 @@ import android.widget.Toast
 import ImageAdapter
 
 class MemoryGame : AppCompatActivity() {
-    var professores = intent.getSerializableExtra("dao")
+    //var professores: ArrayList<Professor> = intent.getSerializableExtra("dao") as ArrayList<Professor>
     lateinit var gvImagens: GridView
-    var curView: ImageView? = null
+    var card1: ImageView? = null
+    var card2: ImageView? = null
     private var countPair: Int = 0
     val cards= arrayOf(
-        R.drawable.img1,
-        R.drawable.img8,
-        R.drawable.img2,
-        R.drawable.img3,
-        R.drawable.img4,
-        R.drawable.img5,
-        R.drawable.img6,
-        R.drawable.img7
+        R.drawable.alana,
+        R.drawable.alex,
+        R.drawable.candido,
+        R.drawable.crishane,
+        R.drawable.damires,
+        R.drawable.denio,
+        R.drawable.edemberg,
+        R.drawable.fausto
     ).toList().shuffled()
     var pos = intArrayOf(0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7).toList().shuffled()
     var currentPos = -1
-
+    var acert: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_memory_game)
 
         this.gvImagens = findViewById(R.id.gvImagens)
         val imageAdapter= ImageAdapter(this)
-        gvImagens.adapter = (imageAdapter)
+        gvImagens.adapter = imageAdapter
 
         var currentPlay = 0
         Log.i("Jogo", "pos:${pos}")
+
         gvImagens.onItemClickListener = object : AdapterView.OnItemClickListener {
             override fun onItemClick(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 //val handler = Handler()
                 view as ImageView
                 Log.i("Jogo", "currentPos:${currentPos} currentPlay${currentPlay}")
                 if (currentPos < 0) {
+                    if (!acert){
+                        card1?.setImageResource(R.drawable.hidden)
+                        card2?.setImageResource(R.drawable.hidden)
+                    }
                     currentPos = position
-                    curView = view
+                    card1 = view
                     (view as ImageView?)?.setImageResource(cards[pos[position]])
                 }
                 else {
-                    if (currentPos == position) {
-                        currentPlay = 1
-                    }
+                    card2 = view
+                    card2?.setImageResource(cards[pos[position]])
 
-                    else if(pos[currentPos] != pos[position]){
-                        curView?.setImageResource(R.drawable.hidden)
-
-                        currentPlay = 2
+                    if(pos[currentPos] != pos[position]){
+                        acert = false
                     }
                     else{
                         (view as ImageView?)?.setImageResource(cards[pos[position]])
+                        acert = true
                         countPair++
-                        currentPlay = 2
                         view.isClickable = true
-                        curView?.isClickable = true
+                        card1?.isClickable = true
 
-                        if(countPair==8)
-                        {
+                        if(countPair==8){
                             Toast.makeText(applicationContext,"You win", Toast.LENGTH_LONG).show()
                         }
                     }
-                    if(currentPlay !=1){
-                        currentPos = -1
-                    }
+                    currentPos = -1
                 }
             }
-
         }
     }
 }

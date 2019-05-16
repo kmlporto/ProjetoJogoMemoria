@@ -61,18 +61,18 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun chamarJogo(view: View){
+    private fun chamarJogo(view: View){
         val intent = Intent(this, MemoryGame::class.java)
         intent.putExtra("dao", daoProf.get())
-        startActivityForResult(intent, JOGO)
+        startActivity(intent)
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if(resultCode == Activity.RESULT_OK && requestCode == JOGO){
-
-        }
-    }
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//
+//        if(resultCode == Activity.RESULT_OK && requestCode == JOGO){
+//
+//        }
+//    }
     
 }
