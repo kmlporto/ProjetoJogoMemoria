@@ -2,7 +2,6 @@ package com.example.projetojododamemoria
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.GridView
@@ -34,7 +33,6 @@ class MemoryGame : AppCompatActivity() {
         var cardprof: List<Int>
         cardprof= this.profRandom.map{ professor -> professor.img }
 
-        Log.i("JOGO", cardprof.toString())
         this.gvImagens = findViewById(R.id.gvImagens)
         val imageAdapter= ImageAdapter(this)
         gvImagens.adapter = imageAdapter
