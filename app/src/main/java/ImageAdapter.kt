@@ -30,8 +30,8 @@ class ImageAdapter: BaseAdapter {
         if (convertView == null){
             imgView = ImageView(this.context)
             val lp = LinearLayout.LayoutParams(
-                210,
-                250
+                190,
+                230
             )
             lp.setMargins(100, 100, 100, 100)
             imgView.setLayoutParams(lp)

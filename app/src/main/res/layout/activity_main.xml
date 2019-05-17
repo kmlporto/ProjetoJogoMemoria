@@ -17,13 +17,13 @@
         <Button
                 android:id="@+id/btLstProf"
                 android:text="Listar Professores"
-                android:layout_width="wrap_content"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"/>
 
         <Button
                 android:id="@+id/btGerarJogo"
                 android:text="Gerar Jogo"
-                android:layout_width="wrap_content"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"/>
 
     </LinearLayout>

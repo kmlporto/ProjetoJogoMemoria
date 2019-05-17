@@ -3,15 +3,13 @@ package com.example.projetojododamemoria
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.AdapterView
-import android.widget.GridView
-import android.widget.ImageView
-import android.widget.Toast
 import ImageAdapter
+import android.widget.*
 
 class MemoryGame : AppCompatActivity() {
-    lateinit var professores: ArrayList<Professor>
     lateinit var gvImagens: GridView
+    lateinit var tvTentativas:TextView
+    lateinit var professores: ArrayList<Professor>
     lateinit var profRandom: List<Professor>
     var card1: ImageView? = null
     var card2: ImageView? = null
@@ -33,6 +31,7 @@ class MemoryGame : AppCompatActivity() {
         var cardprof: List<Int>
         cardprof= this.profRandom.map{ professor -> professor.img }
 
+        this.tvTentativas = findViewById(R.id.tvTentativas)
         this.gvImagens = findViewById(R.id.gvImagens)
         val imageAdapter= ImageAdapter(this)
         gvImagens.adapter = imageAdapter
@@ -41,6 +40,7 @@ class MemoryGame : AppCompatActivity() {
         gvImagens.onItemClickListener = object : AdapterView.OnItemClickListener {
             override fun onItemClick(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 view as ImageView
+                tvTentativas.setText("Tentativas: ${erro}")
                 if (currentPos < 0) {
                     if (!acert){
                         card1?.setImageResource(R.drawable.hidden)
