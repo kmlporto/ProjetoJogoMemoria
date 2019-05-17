@@ -12,22 +12,22 @@ import android.widget.*
 
 class ListActivity : AppCompatActivity() {
     private lateinit var lvProfessores: ListView
-    private lateinit var dao: ProfessorDAO
+    lateinit var professores: ArrayList<Professor>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
 
-        dao = ProfessorDAO(this)
+        this.professores = (intent.getSerializableExtra("dao") as ArrayList<Professor>)
 
         this.lvProfessores = findViewById(R.id.lvProfessores)
-        var adapter = ProfessorAdapter(this, dao.get())
+        val adapter = ProfessorAdapter(this, this.professores)
         lvProfessores.adapter = adapter
     }
 
 
     inner class ProfessorAdapter(private val context: Context,
-                                 private val listProfs: ArrayList<Professor> = dao.get()) :
+                                 private val listProfs: ArrayList<Professor> = this.professores) :
         BaseAdapter() {
 
         private val inflater: LayoutInflater
@@ -43,10 +43,10 @@ class ListActivity : AppCompatActivity() {
             val disciplinasTextView = rowView.findViewById(R.id.tvDisciplinas) as TextView
             val fotoImageView = rowView.findViewById(R.id.tvImagem) as ImageView
 
-            var professor = listProfs[position]
+            val professor = listProfs[position]
             nomeTextView.text = professor.nome
             disciplinasTextView.text = professor.disciplinas
-            var fotoProfessor = professor.img
+            val fotoProfessor = professor.img
 
             fotoImageView.setImageResource(fotoProfessor)
 

@@ -11,41 +11,38 @@ import android.widget.Toast
 import ImageAdapter
 
 class MemoryGame : AppCompatActivity() {
-    //var professores: ArrayList<Professor> = intent.getSerializableExtra("dao") as ArrayList<Professor>
+    lateinit var professores: ArrayList<Professor>
     lateinit var gvImagens: GridView
+    lateinit var profRandom: List<Professor>
     var card1: ImageView? = null
     var card2: ImageView? = null
-    private var countPair: Int = 0
-    val cards= arrayOf(
-        R.drawable.alana,
-        R.drawable.alex,
-        R.drawable.candido,
-        R.drawable.crishane,
-        R.drawable.damires,
-        R.drawable.denio,
-        R.drawable.edemberg,
-        R.drawable.fausto
-    ).toList().shuffled()
+    var countPair: Int = 0
+
     var pos = intArrayOf(0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7).toList().shuffled()
     var currentPos = -1
     var acert: Boolean = false
+    var erro = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_memory_game)
 
+        this.professores = intent.getSerializableExtra("dao") as ArrayList<Professor>
+        this.professores.shuffle()
+        this.profRandom = this.professores.subList(0,8)
+
+        var cardprof: List<Int>
+        cardprof= this.profRandom.map{ professor -> professor.img }
+
+        Log.i("JOGO", cardprof.toString())
         this.gvImagens = findViewById(R.id.gvImagens)
         val imageAdapter= ImageAdapter(this)
         gvImagens.adapter = imageAdapter
 
-        var currentPlay = 0
-        Log.i("Jogo", "pos:${pos}")
 
         gvImagens.onItemClickListener = object : AdapterView.OnItemClickListener {
             override fun onItemClick(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-                //val handler = Handler()
                 view as ImageView
-                Log.i("Jogo", "currentPos:${currentPos} currentPlay${currentPlay}")
                 if (currentPos < 0) {
                     if (!acert){
                         card1?.setImageResource(R.drawable.hidden)
@@ -53,17 +50,18 @@ class MemoryGame : AppCompatActivity() {
                     }
                     currentPos = position
                     card1 = view
-                    (view as ImageView?)?.setImageResource(cards[pos[position]])
+                    (view as ImageView?)?.setImageResource(cardprof[pos[position]])
                 }
                 else {
                     card2 = view
-                    card2?.setImageResource(cards[pos[position]])
+                    card2?.setImageResource(cardprof[pos[position]])
 
                     if(pos[currentPos] != pos[position]){
                         acert = false
+                        erro++
                     }
                     else{
-                        (view as ImageView?)?.setImageResource(cards[pos[position]])
+                        (view as ImageView?)?.setImageResource(cardprof[pos[position]])
                         acert = true
                         countPair++
                         view.isClickable = true
